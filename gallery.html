@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" style="color-scheme: light dark;">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Галерея — RuHist</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <script src="scripts/gallery.js" defer></script>
+</head>
+<body>
+  <header class="site-header">
+    <div class="header-container">
+      <a href="index.html" class="logo">RuHist</a>
+      <nav class="nav-menu">
+        <a href="index.html" class="nav-link">Главная</a>
+        <a href="gallery.html" class="nav-link active">Галерея</a>
+        <a href="info.html" class="nav-link">Информация</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="gallery-main">
+    <div class="intro-text">
+      <h1>Художники Древней Руси</h1>
+      <p>Коллекция работ великих мастеров русской живописи XIX века, чьи картины запечатлели дух эпохи, природу и повседневную жизнь.</p>
+    </div>
+
+    <div class="wrapper">
+      <div class="options">
+        <div class="option active" style="background-image: url(img/Klodt.jpg);">
+          <div class="artist-caption">Михаил Клодт</div>
+        </div>
+        <div class="option" style="background-image: url(img/Kyidgi.jpg);">
+          <div class="artist-caption">Архип Куинджи</div>
+        </div>
+        <div class="option" style="background-image: url(img/Levitan.jpg);">
+          <div class="artist-caption">Исаак Левитан</div>
+        </div>
+        <div class="option" style="background-image: url(img/Polenov.jpg);">
+          <div class="artist-caption">Василий Поленов</div>
+        </div>
+        <div class="option" style="background-image: url(img/Savrasov.jpg);">
+          <div class="artist-caption">Алексей Саврасов</div>
+        </div>
+        <div class="option" style="background-image: url(img/Shishkin.webp);">
+          <div class="artist-caption">Иван Шишкин</div>
+        </div>
+      </div>
+    </div>
+
+    <section class="video-player">
+      <h2>Создание 3D-реконструкции мастерской</h2>
+      <div class="video-wrapper">
+        <video controls playsinline poster="img/Masterskayua.png">
+          <source src="video/studio-animation.mp4" type="video/mp4">
+          Ваш браузер не поддерживает видео.
+        </video>
+      </div>
+      <p class="video-description">
+        3D-анимация, воссоздающая атмосферу творческой мастерской художника конца XIX века.
+      </p>
+    </section>
+  </main>
+
+  <footer class="main-footer">
+    <p>Никаноров Александр Сергеевич • Группа 25-ИСТ-1-2</p>
+  </footer>
+</body>
+</html>
