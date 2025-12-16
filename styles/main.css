@@ -331,6 +331,7 @@ body {
   justify-content: flex-end;
   position: relative;
   cursor: pointer;
+  max-width: calc(100%-20px);
 }
 
 .artist-caption {
@@ -632,4 +633,5 @@ body {
   .facts-title {
     font-size: 1.3rem;
   }
+
 }
