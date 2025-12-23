@@ -13,7 +13,7 @@
   --text: #2a2a2a;
   --text-light: #333;
   --header-bg: rgba(248, 246, 242, 0.85);
-  --glass-bg: rgba(255, 255, 255, 0.08);
+  --glass-bg: rgba(255, 255, 255, 0.15);
   --card-bg: rgba(255, 255, 255, 0.65);
   --radius: 1.875rem;
   --radius-sm: 1.2rem;
@@ -119,7 +119,6 @@ body {
   padding-right: 1rem;
 }
 
-/* Для info.html — центрирование */
 .info-main {
   display: flex;
   justify-content: center;
@@ -129,7 +128,6 @@ body {
    6. ГЛАВНАЯ СТРАНИЦА
    ========================================================================== */
 
-/* --- Стеклянный блок --- */
 .glass-card {
   width: 100%;
   max-width: 740px;
@@ -141,6 +139,19 @@ body {
   border: 1px solid rgba(255, 255, 255, 0.25);
   box-shadow: 0 6px 32px rgba(0, 0, 0, 0.07);
   text-align: center;
+  position: relative;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(232, 227, 221, 0.4);
+  z-index: -1;
+  border-radius: inherit;
 }
 
 .glass-card h1 {
@@ -179,18 +190,11 @@ body {
   margin-bottom: 0;
 }
 
-.description-content strong {
-  color: #1a1a1a;
-  font-weight: 700;
-}
-.description-content em {
-  color: #3a3a3a;
-  font-style: italic;
-}
+.description-content strong { color: #1a1a1a; font-weight: 700; }
+.description-content em { color: #3a3a3a; font-style: italic; }
 
 /* --- Факты --- */
-.facts-section,
-.expanded-info {
+.facts-section {
   width: 100%;
   max-width: 1000px;
   margin: 0 auto 4rem;
@@ -203,18 +207,22 @@ body {
   margin-bottom: 1.8rem;
   font-weight: 700;
   letter-spacing: -0.5px;
+  position: relative;
+  display: inline-block;
+  padding: 0.4rem 0.8rem;
+  background: rgba(255, 255, 255, 0.6);
+  backdrop-filter: blur(4px);
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 
-.facts-grid,
-.info-cards {
+.facts-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 1.4rem;
 }
 
-/* Общая карточка */
-.fact-card,
-.info-card {
+.fact-card {
   background: var(--card-bg);
   backdrop-filter: blur(8px);
   border-radius: var(--radius-sm);
@@ -225,14 +233,12 @@ body {
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.fact-card:hover,
-.info-card:hover {
+.fact-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
-.fact-card h3,
-.info-card h3 {
+.fact-card h3 {
   font-size: 1.3rem;
   font-weight: 800;
   color: #1e1e1e;
@@ -240,29 +246,59 @@ body {
   text-align: center;
 }
 
-.fact-card p,
-.info-card p {
+.fact-card p {
   font-size: 0.98rem;
   line-height: 1.6;
   color: #333;
   margin: 0;
 }
 
-.fact-card strong,
-.info-card strong {
+.fact-card strong {
   color: #2a2a2a;
   font-weight: 700;
 }
 
-/* Специфичное для expanded-info */
-.info-card {
-  padding: 1.6rem 1.4rem;
+/* ==========================================================================
+   7. ДОПОЛНИТЕЛЬНЫЕ СТАТЬИ (3 <article>)
+   ========================================================================== */
+
+.expanded-info {
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto 4rem;
 }
-.info-card h3 {
+
+.info-article {
+  background: var(--card-bg);
+  backdrop-filter: blur(8px);
+  border-radius: var(--radius-sm);
+  padding: 1.6rem 1.4rem;
+  text-align: left;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.4rem;
+  transition: transform 0.3s ease;
+}
+
+.info-article:hover {
+  transform: translateY(-2px);
+}
+
+.info-article h2 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #1e1e1e;
+  margin-bottom: 0.9rem;
   display: flex;
   align-items: center;
   gap: 0.5rem;
-  justify-content: center;
+}
+
+.info-article p {
+  font-size: 0.95rem;
+  line-height: 1.6;
+  color: #333;
+  margin-bottom: 1rem;
 }
 
 .gallery-link {
@@ -284,7 +320,7 @@ body {
 }
 
 /* ==========================================================================
-   7. СТРАНИЦА ГАЛЕРЕИ
+   8. СТРАНИЦА ГАЛЕРЕИ — СЕМАНТИЧЕСКИЕ ТЕГИ
    ========================================================================== */
 
 .intro-text {
@@ -319,22 +355,29 @@ body {
 }
 
 .option {
+  position: relative;
   background-color: color-mix(in srgb, var(--bg), CanvasText 10%);
   flex-grow: 1;
   border-radius: var(--radius);
   flex: 0 0 60px;
-  transition: flex-grow 1.25s cubic-bezier(0.17, 0.84, 0.44, 1);
-  background-position: center;
-  background-size: cover;
+  transition: flex-grow 1.25s cubic-bezier(.17, .84, .44, 1);
+  cursor: pointer;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   justify-content: flex-end;
-  position: relative;
-  cursor: pointer;
-  max-width: calc(100%-20px);
+  max-width: calc(100% - 20px);
 }
 
-.artist-caption {
+.option img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border-radius: inherit;
+}
+
+.option figcaption {
   position: absolute;
   bottom: 10px;
   left: 10px;
@@ -349,6 +392,7 @@ body {
   text-overflow: ellipsis;
   max-width: calc(100% - 20px);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  pointer-events: none;
 }
 
 .option.active {
@@ -390,7 +434,7 @@ body {
 }
 
 /* ==========================================================================
-   8. СТРАНИЦА ИНФОРМАЦИИ
+   9. СТРАНИЦА ИНФОРМАЦИИ
    ========================================================================== */
 
 .info-container {
@@ -441,7 +485,7 @@ body {
 }
 
 /* ==========================================================================
-   9. FOOTER
+   10. FOOTER
    ========================================================================== */
 
 .main-footer {
@@ -462,7 +506,7 @@ body {
 }
 
 /* ==========================================================================
-   10. АДАПТИВНОСТЬ
+   11. АДАПТИВНОСТЬ
    ========================================================================== */
 
 @media (max-width: 1140px) {
@@ -472,8 +516,7 @@ body {
 }
 
 @media (max-width: 900px) {
-  .facts-grid,
-  .info-cards {
+  .facts-grid {
     grid-template-columns: repeat(2, 1fr);
   }
 }
@@ -517,6 +560,29 @@ body {
     padding: 0 0.4rem;
   }
 
+  /* Факты */
+  .facts-grid {
+    grid-template-columns: 1fr;
+  }
+  .facts-title {
+    font-size: 1.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .fact-card {
+    padding: 1.3rem 1rem;
+  }
+  .fact-card h3 {
+    font-size: 1.2rem;
+  }
+
+  /* Статьи */
+  .info-article {
+    padding: 1.4rem 1.2rem;
+  }
+  .info-article h2 {
+    font-size: 1.15rem;
+  }
+
   /* Галерея */
   .gallery-main {
     padding: 5rem 0.8rem 2.5rem;
@@ -536,16 +602,19 @@ body {
     height: 100px;
     flex: none;
     transition: height 0.4s ease;
+    max-width: 100%;
   }
   .option.active {
     height: 300px;
     flex: none !important;
+    max-width: 100%;
   }
-  .artist-caption {
+  .option figcaption {
     font-size: 0.7rem;
     padding: 3px 6px;
     bottom: 8px;
     left: 8px;
+    max-width: calc(100% - 16px);
   }
   .video-player h2 {
     font-size: 1.5rem;
@@ -567,7 +636,6 @@ body {
     font-size: 0.95rem;
   }
 
-  /* Общее */
   .main-footer {
     padding: 1rem;
     font-size: 0.88rem;
@@ -575,28 +643,6 @@ body {
 }
 
 @media (max-width: 600px) {
-  .facts-grid,
-  .info-cards {
-    grid-template-columns: 1fr;
-  }
-  .facts-title,
-  .expanded-info {
-    margin-bottom: 3rem;
-  }
-  .facts-title {
-    font-size: 1.4rem;
-    margin-bottom: 1.5rem;
-  }
-  .fact-card,
-  .info-card {
-    padding: 1.3rem 1rem;
-  }
-  .fact-card h3,
-  .info-card h3 {
-    font-size: 1.2rem;
-  }
-
-  /* Галерея */
   .gallery-main {
     padding: 5rem 0.6rem 2rem;
   }
@@ -610,7 +656,6 @@ body {
     font-size: 1.4rem;
   }
 
-  /* Информация */
   .info-container {
     width: 94%;
   }
@@ -633,5 +678,86 @@ body {
   .facts-title {
     font-size: 1.3rem;
   }
+}
 
+/* ==========================================================================
+   12. ФОРМА И ТАБЛИЦА (новые элементы)
+   ========================================================================== */
+
+.tech-table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1rem 0;
+  font-size: 0.95rem;
+}
+
+.tech-table th,
+.tech-table td {
+  padding: 0.8rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+
+.tech-table th {
+  background: rgba(232, 227, 221, 0.4);
+  font-weight: 600;
+  color: #222;
+}
+
+.tech-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Форма */
+.feedback-form {
+  margin-top: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.2rem;
+}
+
+.feedback-form label {
+  display: block;
+  margin-bottom: 0.4rem;
+  font-weight: 600;
+  color: #222;
+}
+
+.feedback-form input,
+.feedback-form textarea {
+  width: 100%;
+  padding: 0.6rem 0.8rem;
+  border: 1px solid #ccc;
+  border-radius: 0.5rem;
+  font-family: inherit;
+  font-size: 1rem;
+  transition: border 0.2s;
+}
+
+.feedback-form input:focus,
+.feedback-form textarea:focus {
+  outline: none;
+  border-color: #888;
+}
+
+.form-submit {
+  background: var(--header-bg);
+  color: var(--text);
+  border: none;
+  padding: 0.6rem 1.2rem;
+  border-radius: 0.5rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+
+.form-submit:hover {
+  background: rgba(248, 246, 242, 0.95);
+}
+
+.form-message {
+  margin-top: 0.8rem;
+  font-weight: 600;
+  min-height: 1.5rem;
 }
