@@ -27,7 +27,7 @@ camera.position.z = 5;
 const renderer = new THREE.WebGLRenderer({
   canvas,
   antialias: true,
-  alpha: true // делает фон прозрачным
+  alpha: true
 });
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.setPixelRatio(window.devicePixelRatio);
@@ -50,11 +50,10 @@ loader.load(
 
     // Масштабирование под сцену
     const size = box.getSize(new THREE.Vector3()).length();
-    const scale = 3 / size; // целевой размер ~3 единицы
+    const scale = 3 / size;
     painting.scale.set(scale, scale, scale);
 
     scene.add(painting);
-    // Прозрачность модели и убрать акцент
 painting.traverse((child) => {
   if (child.isMesh) {
     // Уменьшаем насыщенность и делаем чуть прозрачным
@@ -83,10 +82,10 @@ const currentRotation = { x: 0, y: 0 };
 const ease = 0.05; // плавность
 
 window.addEventListener('mousemove', (e) => {
-  const x = (e.clientX / window.innerWidth) * 2 - 1;   // от -1 до +1
-  const y = -(e.clientY / window.innerHeight) * 2 + 1; // от +1 до -1
-  targetRotation.y = x * 0.2;  // горизонтальный поворот
-  targetRotation.x = y * 0.15; // вертикальный поворот
+  const x = (e.clientX / window.innerWidth) * 2 - 1;
+  const y = -(e.clientY / window.innerHeight) * 2 + 1;
+  targetRotation.y = x * 0.2;
+  targetRotation.x = y * 0.15;
 });
 
 // === Анимационный цикл ===
